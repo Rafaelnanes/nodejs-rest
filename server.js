@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var consign = require('consign');
-var objectId = require('mongodb').ObjectId; // converte o tipo da primaryKey no mongodb
 
 var app = express();
 
