@@ -9,7 +9,9 @@ app.use(bodyParser.json());
 
 consign()
     .include('./config/database.js')
-    .then('./api')
+    .then('config/utils.js')
+    .then('api/dao') // first dao then controllers, otherwise will throw NPE when get DAO from the Controller
+    .then('api/controllers')
     .into(app);
 
 var port = 8080;

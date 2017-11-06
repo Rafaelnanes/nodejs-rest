@@ -1,0 +1,5 @@
+1 - Return promisses instead of callbacks
+2 - Transactions
+3 - JWT
+4 - Interceptors in order to reduce repetitive code
+5 - concat strings
