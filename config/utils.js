@@ -1,18 +1,20 @@
-module.exports = function () {
+module.exports = function (app) {
 
     var defaultDaoHandler = function (error, doc, messageError, messageSuccess) {
-        var response = {};
+        var __response = {};
+        var __STATUS = app.config.constants.STATUS;
+
         if (error) {
-            response.status = 0;
-            response.message = messageError + ', ' + error;
-            response.doc = null;
+            __response.status = __STATUS.BAD_REQUEST;
+            __response.message = messageError + ', ' + error;
+            __response.doc = null;
         } else {
-            response.status = 1;
-            response.message = messageSuccess;
-            response.doc = doc;
+            __response.status = __STATUS.SUCCESS;
+            __response.message = messageSuccess;
+            __response.doc = doc;
         }
 
-        return response;
+        return __response;
     }
 
     return {

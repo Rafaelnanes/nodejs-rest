@@ -1,5 +1,10 @@
 1 - Return promisses instead of callbacks
 2 - Transactions
-3 - JWT
-4 - Interceptors in order to reduce repetitive code
+4 - Interceptors in order to reduce repetitive code in controller layer
 5 - concat strings
+6 - IoC
+7 - Testing connection pool
+8 - verify doc before insert
+9 - Use base64 to parse the token with user roles
+10 - Refactor literals objects
+11 - Add authorization
