@@ -3,26 +3,26 @@ var jwt = require('jsonwebtoken');
 module.exports = function (app) {
     var __userDAO = app.api.dao.userDAO;
     var __moduleName = '/user';
+    var utils = app.config.utils;
 
-    app.post(__moduleName, function (req, res) {
-
+    app.post(__moduleName, app.api.security.auth.authenticate(), function (req, res) {
+        var password = utils.generatePassword(req.body.password);
         var user = {
             login: req.body.login,
-            password: req.body.password
+            password: password
         };
 
-        __userDAO.save(user, function (response) {
-
-            if (response.status == app.config.constants.STATUS.SUCCESS) {
-                var token = jwt.sign(
-                    { id: user._id },
-                    app.config.constants.SECRET,
-                    { expiresIn: app.config.constants.TOKEN_EXPIRE }
-                )
-                res.setHeader(app.config.constants.TOKEN_HEADER, token);
+        __userDAO.findByLogin(user.login, function(response){
+            if(!!response.doc){
+                response.doc = {};
+                response.status = app.config.constants.STATUS.BAD_REQUEST;
+                response.message = 'User already exists';
+                res.send(response);
+            }else{
+                __userDAO.save(user, function (response) {
+                    res.send(response);
+                });
             }
-            res.send(response);
-
         });
 
     });

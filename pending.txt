@@ -8,3 +8,6 @@
 9 - Use base64 to parse the token with user roles
 10 - Refactor literals objects
 11 - Add authorization
+12 - Intercept the response and send status 400 when get some error on controllers
+13 - Change call for constants to put in app.constans
+14 - add mediators

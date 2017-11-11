@@ -18,6 +18,24 @@ module.exports = function (app) {
         });
     }
 
+    var findByLogin = function (login, callback) {
+        UserModel.findOne({ login: login }, function (error, doc) {
+            var response = utils.defaultDaoHandler(error, doc, 'Error getting user');
+            callback(response);
+        });
+    }
+
+    var findOneByQuery = function (query, callback) {
+        UserModel.findOne(query, function (error, doc) {
+            var response = {};
+            response = utils.defaultDaoHandler(error, doc, 'Error getting user');
+            if (!doc) {
+                response.message = 'User not foud';
+            }
+            callback(response);
+        });
+    }
+
     var findByQuery = function (query, callback) {
         UserModel.find(query, function (error, doc) {
             var response = utils.defaultDaoHandler(error, doc, 'Error getting user');
@@ -43,6 +61,8 @@ module.exports = function (app) {
     return {
         findById: findById,
         findByQuery: findByQuery,
+        findOneByQuery: findOneByQuery,
+        findByLogin: findByLogin,
         save: save
     }
 }

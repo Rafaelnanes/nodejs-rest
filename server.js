@@ -11,9 +11,10 @@ consign()
     .include('./config/database.js')
     .then('config/constants.js')
     .then('config/utils.js')
-    .then('config/interceptors.js')
     .then('api/dao') // first dao then controllers, otherwise will throw NPE when get DAO from the Controller
+    .then('api/security/auth.js')
     .then('api/controllers')
+    .then('config/middlewares.js')
     .into(app);
 
 var port = 8080;
