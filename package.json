@@ -1,5 +1,5 @@
 {
-  "name": "server_instagram_clone",
+  "name": "nodejs-rest",
   "version": "1.1.0",
   "description": "",
   "main": "server.js",
