@@ -16,14 +16,14 @@ module.exports = function (app) {
             var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
             callback(response);
         });
-    }
+    };
 
     var findByLogin = function (login, callback) {
         UserModel.findOne({ login: login }, function (error, doc) {
             var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
             callback(response);
         });
-    }
+    };
 
     var findOneByQuery = function (query, callback) {
         UserModel.findOne(query, function (error, doc) {
@@ -34,14 +34,14 @@ module.exports = function (app) {
             }
             callback(response);
         });
-    }
+    };
 
     var findByQuery = function (query, callback) {
         UserModel.find(query, function (error, doc) {
             var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
             callback(response);
-        })
-    }
+        });
+    };
 
     var save = function (user, callback) {
 
@@ -56,7 +56,7 @@ module.exports = function (app) {
             var response = utils.defaultResponseHandler(error, doc, 'Error saving user', 'User saved');
             callback(response);
         });
-    }
+    };
 
     return {
         findById: findById,
@@ -64,5 +64,5 @@ module.exports = function (app) {
         findOneByQuery: findOneByQuery,
         findByLogin: findByLogin,
         save: save
-    }
-}
+    };
+};
