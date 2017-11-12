@@ -11,11 +11,18 @@ module.exports = function (app) {
             login: req.body.login,
             password: password
         };
-        
+
         __userMediator.findByLogin(user.login, function (response) {
             res.send(response);
         });
 
     });
+
+    app.get(__moduleName,
+        app.api.security.auth.authenticate(),
+        app.api.security.auth.authenticateWithRole('user.insert'),
+        function (req, res, next) {
+            res.send('test');
+        })
 
 }

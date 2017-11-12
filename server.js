@@ -12,8 +12,8 @@ consign()
     .then('config/constants.js')
     .then('config/utils.js')
     .then('api/dao') // first dao then controllers, otherwise will throw NPE when get DAO from the Controller
-    .then('api/security/auth.js')
     .then('api/mediator')
+    .then('api/security/auth.js')
     .then('api/controller')
     .then('config/middlewares.js')
     .into(app);
