@@ -2,5 +2,4 @@
 2 - Transactions
 3 - IoC
 4 - Testing connection pool -> http://theholmesoffice.com/mongoose-connection-best-practice/
-8 - add log
 10 - Run script before start server, https://github.com/tj/node-migrate 

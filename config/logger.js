@@ -15,7 +15,6 @@ module.exports = function (app) {
             new (winston.transports.Console)({
                 timestamp: tsFormat,
                 colorize: true,
-                format: 'winston.format.json()',
                 level: 'info'
             }),
             new (require('winston-daily-rotate-file'))({
