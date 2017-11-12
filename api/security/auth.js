@@ -62,6 +62,7 @@ module.exports = function (app) {
         authenticatePermission: function (permissionName) {
             return function (req, res, next) {
                 __permissionMediator.findByUserId(req.user.id, permissionName, function (isPermissionFound) {
+                    console.log('found? ', isPermissionFound);
                     if (isPermissionFound) {
                         next();
                     } else {

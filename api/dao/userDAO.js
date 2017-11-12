@@ -6,8 +6,7 @@ module.exports = function (app) {
 
     var userSchema = new Mongoose.Schema({
         login: String,
-        password: String,
-        permissions: [{type: Mongoose.Schema.Types.ObjectId, ref: 'permissions'}]
+        password: String
     });
 
     var UserModel = Mongoose.model('users', userSchema);

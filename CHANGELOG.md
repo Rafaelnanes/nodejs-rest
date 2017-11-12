@@ -1,3 +1,8 @@
+## [1.2.0] - 2017-11-12
+### Added
+- Db-Migration
+- Improved the relation between User and Permission to N-N
+
 ## [1.1.0] - 2017-11-12
 ### Added
 - Middleware to authorize endpoints

@@ -3,19 +3,40 @@ module.exports = function (app) {
     var utils = app.config.utils;
 
     var permissionsSchema = new Mongoose.Schema({
-        name: String,
-        users: [{ type: Mongoose.Schema.Types.ObjectId, ref: 'users' }]
+        name: String
+    });
+
+    var usersPermissionsSchema = new Mongoose.Schema({
+        permission_id: [{ type: Mongoose.Schema.Types.ObjectId, ref: 'permissions' }],
+        user_id: [{ type: Mongoose.Schema.Types.ObjectId, ref: 'users' }]
     });
 
     var PermissionModel = Mongoose.model('permissions', permissionsSchema);
+    var UserPermissionModel = Mongoose.model('users-permissions', usersPermissionsSchema);
 
-    var findByUserId = function (id, callback) {
-        PermissionModel.find({ user_id: id })
-            .populate('user_id').
-            exec(function (error, doc) {
-                var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
+    var findPermissionByName = function (permissionName, callback) {
+        PermissionModel.findOne({ name: permissionName }, function (error, doc) {
+            var response = utils.defaultResponseHandler(error, doc, 'Error getting permission');
+            callback(response);
+        }); 
+    }
+
+    var findByUserId = function (id, permissionName, callback) {
+        findPermissionByName(permissionName, function (response) {
+            if(response.doc){
+                var query = { user_id: id, permission_id: response.doc._id };
+                UserPermissionModel.find(query)
+                    .populate('user_id', 'permission_id')
+                    .exec(function (error, doc) {
+                        var response = utils.defaultResponseHandler(error, doc, 'Error getting user permission');
+                        callback(response);
+                    });
+            }else{
                 callback(response);
-            });
+            }
+        });
+
+
     };
 
     return {

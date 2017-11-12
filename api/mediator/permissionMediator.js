@@ -2,14 +2,10 @@ module.exports = function (app) {
     var __permissionDAO = app.api.dao.permissionDAO;
 
     var findByUserId = function (userId, permissionName, callback) {
-        __permissionDAO.findByUserId(userId, function (response) {
+        __permissionDAO.findByUserId(userId, permissionName, function (response) {
             var isPermissionFound = false;
             if (response.doc) {
-                response.doc.forEach(function (item) {
-                    if (permissionName == item.name) {
-                        isPermissionFound = true;
-                    }
-                });
+                isPermissionFound = true;
             }
             callback(isPermissionFound);
         });
