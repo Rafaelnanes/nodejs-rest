@@ -1,8 +1,12 @@
 var winston = require('winston');
 var fs = require('fs');
 var env = process.env.NODE_ENV || 'development';
+var logDir = 'log';
+module.exports = function (app) {
 
-module.exports = function(app){
+    if (!fs.existsSync(logDir)) {
+        fs.mkdirSync(logDir);
+    }
 
     var tsFormat = () => (new Date()).toLocaleTimeString();
     var logger = new (winston.Logger)({
@@ -11,17 +15,18 @@ module.exports = function(app){
             new (winston.transports.Console)({
                 timestamp: tsFormat,
                 colorize: true,
+                format: 'winston.format.json()',
                 level: 'info'
-            }), 
-            new (winston.transports.File)({
-                filename: 'log/api.log',
+            }),
+            new (require('winston-daily-rotate-file'))({
+                filename: logDir + '/-api.log',
                 timestamp: tsFormat,
+                datePattern: 'yyyy-MM-dd',
+                prepend: true,
                 level: 'debug'
             })
         ]
     });
-
-    logger.level = 'debug';
 
     logger.info('teste info');
     logger.debug('teste debug');
