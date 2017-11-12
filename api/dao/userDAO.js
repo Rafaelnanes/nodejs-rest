@@ -14,14 +14,14 @@ module.exports = function (app) {
 
     var findById = function (id, callback) {
         UserModel.findById(id, function (error, doc) {
-            var response = utils.defaultDaoHandler(error, doc, 'Error getting user');
+            var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
             callback(response);
         });
     }
 
     var findByLogin = function (login, callback) {
         UserModel.findOne({ login: login }, function (error, doc) {
-            var response = utils.defaultDaoHandler(error, doc, 'Error getting user');
+            var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
             callback(response);
         });
     }
@@ -29,7 +29,7 @@ module.exports = function (app) {
     var findOneByQuery = function (query, callback) {
         UserModel.findOne(query, function (error, doc) {
             var response = {};
-            response = utils.defaultDaoHandler(error, doc, 'Error getting user');
+            response = utils.defaultResponseHandler(error, doc, 'Error getting user');
             if (!doc) {
                 response.message = 'User not foud';
             }
@@ -39,7 +39,7 @@ module.exports = function (app) {
 
     var findByQuery = function (query, callback) {
         UserModel.find(query, function (error, doc) {
-            var response = utils.defaultDaoHandler(error, doc, 'Error getting user');
+            var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
             callback(response);
         })
     }
@@ -54,7 +54,7 @@ module.exports = function (app) {
         });
 
         model.save(function (error, doc) {
-            var response = utils.defaultDaoHandler(error, doc, 'Error saving user', 'User saved');
+            var response = utils.defaultResponseHandler(error, doc, 'Error saving user', 'User saved');
             callback(response);
         });
     }

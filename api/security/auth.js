@@ -59,7 +59,7 @@ module.exports = function (app) {
         authenticate: function () {
             return passport.authenticate("jwt", app.config.constants.JWT_SESSION);
         },
-        authenticateWithRole: function (permissionName) {
+        authenticatePermission: function (permissionName) {
             return function (req, res, next) {
                 __permissionMediator.findByUserId(req.user.id, permissionName, function (isPermissionFound) {
                     if (isPermissionFound) {

@@ -1,6 +1,7 @@
-## [1.0.0] - 2017-11-12
+## [1.1.0] - 2017-11-12
 ### Added
-- Middleware Authorization to endpoints
+- Middleware to authorize endpoints
+- Logger and a middleware to log all request
 
 ## [1.0.0] - 2017-11-11
 ### Added

@@ -2,10 +2,5 @@
 2 - Transactions
 3 - IoC
 4 - Testing connection pool -> http://theholmesoffice.com/mongoose-connection-best-practice/
-5 - Use base64 to parse the token with user roles
-6 - Refactor literals objects
-7 - Intercept the response and send status 400 when get some error on controllers
 8 - add log
-9 - install jslint
 10 - Run script before start server, https://github.com/tj/node-migrate 
-11 - asserts to required fields in each endpoint

@@ -13,7 +13,7 @@ module.exports = function (app) {
         PermissionModel.find({ user_id: id })
             .populate('user_id').
             exec(function (error, doc) {
-                var response = utils.defaultDaoHandler(error, doc, 'Error getting user');
+                var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
                 callback(response);
             });
     };

@@ -1,28 +1,42 @@
-var jwt = require('jsonwebtoken');
-
 module.exports = function (app) {
     var __userMediator = app.api.mediator.userMediator;
     var __moduleName = '/user';
-    var utils = app.config.utils;
+    var __utils = app.config.utils;
+    var __auth = app.api.security.auth;
 
-    app.post(__moduleName, app.api.security.auth.authenticate(), function (req, res) {
-        var password = utils.generatePassword(req.body.password);
-        var user = {
-            login: req.body.login,
-            password: password
-        };
+    app.post(
+        __moduleName,
+        __auth.authenticate(),
+        __auth.authenticatePermission('user.insert'),
+        __utils.checkAsserts(
+            [{
+                name: 'login',
+                type: 'required'
+            },
+            {
+                name: 'password',
+                type: 'required'
+            }]
+        ),
+        function (req, res) {
+            var password = __utils.generatePassword(req.body.password);
+            var user = {
+                login: req.body.login,
+                password: password
+            };
 
-        __userMediator.findByLogin(user.login, function (response) {
-            res.send(response);
+            __userMediator.save(user, function (response) {
+                res.send(response);
+            });
+
         });
 
-    });
-
-    app.get(__moduleName,
-        app.api.security.auth.authenticate(),
-        app.api.security.auth.authenticateWithRole('user.insert'),
+    app.get(
+        __moduleName,
+        __auth.authenticate(),
+        __auth.authenticatePermission('user.list'),
         function (req, res, next) {
             res.send('test');
-        })
+        });
 
-}
+};
