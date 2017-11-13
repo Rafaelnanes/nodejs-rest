@@ -16,8 +16,33 @@ module.exports = function (app) {
         });
     }
 
-    return {
-        save: save
-    }
+    var hasUserPermission = function (userId, permissionName, callback) {
+        var query = {
+            _id: userId,
+            permissions: permissionName
+        };
+        __userDAO.findOneByQuery(query, function (response) {
+            var isPermissionFound = false;
+            if (response.doc) {
+                isPermissionFound = true;
+            }
+            callback(isPermissionFound);
+        });
+    };
 
-}
+    var findOneByQuery = function (query, callback) {
+        __userDAO.findOneByQuery(query, function (response) {
+            if (!response.doc) {
+                response.message = 'User not foud';
+            }
+            callback(response);
+        });
+    };
+
+    return {
+        save: save,
+        hasUserPermission: hasUserPermission,
+        findOneByQuery: findOneByQuery
+    };
+
+};

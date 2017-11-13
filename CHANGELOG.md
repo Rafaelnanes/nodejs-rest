@@ -1,3 +1,7 @@
+## [1.2.1] - 2017-11-13
+### Updated
+- Fixing the way of using nosql, removing the relationship 
+
 ## [1.2.0] - 2017-11-12
 ### Added
 - Db-Migration

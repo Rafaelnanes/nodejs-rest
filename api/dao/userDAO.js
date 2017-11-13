@@ -27,17 +27,13 @@ module.exports = function (app) {
 
     var findOneByQuery = function (query, callback) {
         UserModel.findOne(query, function (error, doc) {
-            var response = {};
-            response = utils.defaultResponseHandler(error, doc, 'Error getting user');
-            if (!doc) {
-                response.message = 'User not foud';
-            }
+            var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
             callback(response);
         });
     };
 
-    var findByQuery = function (query, callback) {
-        UserModel.find(query, function (error, doc) {
+    var findByPermissions = function (query, permissions, callback) {
+        UserModel.find(query).where(permissions).in(permissions).exec(function(error, doc){
             var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
             callback(response);
         });
@@ -49,7 +45,8 @@ module.exports = function (app) {
 
         var model = new UserModel({
             login: user.login,
-            password: user.password
+            password: user.password,
+            permissions: user.permissions
         });
 
         model.save(function (error, doc) {
@@ -60,7 +57,7 @@ module.exports = function (app) {
 
     return {
         findById: findById,
-        findByQuery: findByQuery,
+        findByPermissions: findByPermissions,
         findOneByQuery: findOneByQuery,
         findByLogin: findByLogin,
         save: save

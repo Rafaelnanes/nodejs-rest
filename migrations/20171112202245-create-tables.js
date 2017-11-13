@@ -18,17 +18,8 @@ exports.up = function (db, callback) {
   db.createTable('users', {
     _id: { type: 'int', primaryKey: true },
     login: 'string',
-    password: 'string'
-  });
-
-  db.createTable('permissions', {
-    _id: { type: 'int', primaryKey: true },
-    name: 'string'
-  });
-
-  db.createTable('users-permissions', {
-    user_id: 'int',
-    permission_id: 'int'
+    password: 'string',
+    permissions: 'array'
   });
 
   db.createTable('products', {

@@ -16,7 +16,9 @@ module.exports = function (app) {
         var message = 'url: ' + req.url + ', body: ' + JSON.stringify(req.body);
         if (token) {
             var jwtDecoded = jwt.decode(token, app.config.constants.JWT_SECRET);
-            message = 'User: ' + jwtDecoded.id + ', ' + message;
+            if(jwtDecoded){
+                message = 'User: ' + jwtDecoded.id + ', ' + message;
+            }
         }
         __logger.info(message);
         next();

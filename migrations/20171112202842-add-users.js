@@ -18,19 +18,25 @@ exports.setup = function (options, seedLink) {
 
 exports.up = function (db, callback) {
   var tableName = 'users';
-  var adminId = mongoose.Types.ObjectId('a6cb91bdc3464f14678934ca');
-  var guestId = mongoose.Types.ObjectId('a6cb91bdc3464f14678934cb');
 
   var get = db.insert(tableName, {
-    _id: adminId,
     login: 'admin',
-    password: '21232f297a57a5a743894a0e4a801fc3'
+    password: '21232f297a57a5a743894a0e4a801fc3',
+    permissions:[
+      'user.insert',
+      'user.list',
+      'product.insert',
+      'product.list'
+    ]
   });
 
   db.insert(tableName, {
-    _id: guestId,
     login: 'guest',
-    password: '21232f297a57a5a743894a0e4a801fc3'
+    password: '21232f297a57a5a743894a0e4a801fc3',
+    permissions:[
+      'product.insert',
+      'product.list'
+    ]
   });
 
   callback();

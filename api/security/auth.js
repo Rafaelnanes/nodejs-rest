@@ -6,8 +6,7 @@ var Strategy = passportJWT.Strategy;
 var crypto = require('crypto');
 
 module.exports = function (app) {
-    var __userDAO = app.api.dao.userDAO;
-    var __permissionMediator = app.api.mediator.permissionMediator;
+    var __userMediator = app.api.mediator.userMediator;
     var __utils = app.config.utils;
     var params = {
         secretOrKey: app.config.constants.JWT_SECRET,
@@ -16,7 +15,7 @@ module.exports = function (app) {
 
     var strategy = new Strategy(params, function (payload, done) {
         var query = { _id: payload.id };
-        __userDAO.findOneByQuery(query, function (response) {
+        __userMediator.findOneByQuery(query, function (response) {
             if (response.doc) {
                 return done(null, { id: response.doc.id });
             } else {
@@ -61,8 +60,7 @@ module.exports = function (app) {
         },
         authenticatePermission: function (permissionName) {
             return function (req, res, next) {
-                __permissionMediator.hasUserPermission(req.user.id, permissionName, function (isPermissionFound) {
-                    console.log('found? ', isPermissionFound);
+                __userMediator.hasUserPermission(req.user.id, permissionName, function (isPermissionFound) {
                     if (isPermissionFound) {
                         next();
                     } else {
