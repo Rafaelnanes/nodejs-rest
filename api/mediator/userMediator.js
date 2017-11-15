@@ -39,10 +39,16 @@ module.exports = function (app) {
         });
     };
 
+    var findAll = function (callback) {
+        __userDAO.findAll(function (response) {
+            callback(response);
+        });
+    };
     return {
         save: save,
         hasUserPermission: hasUserPermission,
-        findOneByQuery: findOneByQuery
+        findOneByQuery: findOneByQuery,
+        findAll: findAll
     };
 
 };

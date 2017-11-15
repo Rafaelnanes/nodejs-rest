@@ -33,8 +33,6 @@ exports.up = function (db, callback) {
 exports.down = function (db, callback) {
   db.dropTable('migrations');
   db.dropTable('users');
-  db.dropTable('permissions');
-  db.dropTable('users-permissions');
   db.dropTable('products');
   callback();
 };

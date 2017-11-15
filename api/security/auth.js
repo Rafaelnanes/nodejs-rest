@@ -10,7 +10,7 @@ module.exports = function (app) {
     var __utils = app.config.utils;
     var params = {
         secretOrKey: app.config.constants.JWT_SECRET,
-        jwtFromRequest: ExtractJwt.fromHeader('x-auth-token')
+        jwtFromRequest: ExtractJwt.fromHeader(app.config.constants.TOKEN_HEADER)
     };
 
     var strategy = new Strategy(params, function (payload, done) {
@@ -38,7 +38,7 @@ module.exports = function (app) {
                 password: password
             };
 
-            __userDAO.findOneByQuery(user, function (response) {
+            __userMediator.findOneByQuery(user, function (response) {
                 if (response.doc) {
                     var payload = { id: user.id };
                     var token = jwt.sign(

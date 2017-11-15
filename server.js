@@ -24,6 +24,8 @@ consign()
 var port = 8080;
 
 app.listen(port);
-console.log('Listening port ' + port);
+console.log(`Listening port ${port}`);
+
+module.exports = app;
 
 

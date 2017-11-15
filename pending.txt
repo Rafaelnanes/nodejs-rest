@@ -1,4 +1,2 @@
-1 - Return promisses instead of callbacks
-2 - Transactions
-3 - IoC
-4 - Testing connection pool -> http://theholmesoffice.com/mongoose-connection-best-practice/
+1 - separate the test environment from the dev
+2 - Testing connection pool -> http://theholmesoffice.com/mongoose-connection-best-practice/

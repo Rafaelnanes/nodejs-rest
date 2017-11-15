@@ -27,8 +27,8 @@ module.exports = function (app) {
         ]
     });
 
-    logger.info('teste info');
-    logger.debug('teste debug');
+    logger.info('Test info log');
+    logger.debug('Test debug log');
 
     return logger;
 }

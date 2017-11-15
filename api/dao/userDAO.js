@@ -33,8 +33,15 @@ module.exports = function (app) {
     };
 
     var findByPermissions = function (query, permissions, callback) {
-        UserModel.find(query).where(permissions).in(permissions).exec(function(error, doc){
+        UserModel.find(query).where(permissions).in(permissions).exec(function (error, doc) {
             var response = utils.defaultResponseHandler(error, doc, 'Error getting user');
+            callback(response);
+        });
+    };
+
+    var findAll = function (callback) {
+        UserModel.find({}, function (error, doc) {
+            var response = utils.defaultResponseHandler(error, doc, 'Error getting users');
             callback(response);
         });
     };
@@ -60,6 +67,7 @@ module.exports = function (app) {
         findByPermissions: findByPermissions,
         findOneByQuery: findOneByQuery,
         findByLogin: findByLogin,
-        save: save
+        save: save,
+        findAll: findAll
     };
 };

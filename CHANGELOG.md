@@ -1,3 +1,9 @@
+## [1.3.0] - 2017-11-15
+### Added
+- Integration tests to endoints
+### Updated
+- Fixed some bugs and improvements of the quality of source code
+
 ## [1.2.1] - 2017-11-13
 ### Updated
 - Fixing the way of using nosql, removing the relationship 

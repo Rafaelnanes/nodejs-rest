@@ -36,7 +36,9 @@ module.exports = function (app) {
         __auth.authenticate(),
         __auth.authenticatePermission('user.list'),
         function (req, res, next) {
-            res.send('test');
+            __userMediator.findAll(function (response) {
+                res.send(response);
+            });
         });
 
 };

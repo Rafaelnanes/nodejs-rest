@@ -5,24 +5,24 @@ module.exports = function (app) {
         __productDAO.save(product, function (response) {
             callback(response);
         });
-    }
-    
-    var findById = function(id, callback){
+    };
+
+    var findById = function (id, callback) {
         __productDAO.findById(id, function (response) {
             callback(response);
         });
     }
 
-    var findByQuery = function(query, callback){
+    var findByQuery = function (query, callback) {
         __productDAO.findByQuery(query, function (response) {
             callback(response);
         });
-    }
-
+    };
+    
     return {
         save: save,
         findByQuery: findByQuery,
         findById: findById
-    }
+    };
 
-}
+};
